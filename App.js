@@ -16,9 +16,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { ThemeProvider } from "@rneui/themed";
 
 // Project imports: Three Top-level transition screens
-import Today from "./screens/Today";
-import Month from "./screens/Month";
-import Search from "./screens/Search";
+import TodayScreen from "./screens/TodayScreen";
+import MonthScreen from "./screens/MonthScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 // Bottom Tab Navigator will be applied using the Tab constant inside the Safe Area Provider & Navigator Containers.
 const Tab = createBottomTabNavigator();
@@ -32,22 +32,21 @@ export default function App() {
             initialRouteName="Today"
             screenOptions={{
               tabBarStyle: {
-                backgroundColor: "#94d2bd4c",
+                backgroundColor: "#bde3d7",
               },
               tabBarActiveTintColor: "#005F73",
-              tabBarInactiveTintColor: "#005f73a6",
+              tabBarInactiveTintColor: "#00a0c1",
               headerStyle: {
-                backgroundColor: "#94d2bd4c",
+                backgroundColor: "#bde3d7",
               },
               headerTintColor: "#005F73",
-              headerTitleAlign: "center",
-              tabBarShowLabel: false,
             }}
           >
             <Tab.Screen
               name="Today"
-              component={Today}
+              component={TodayScreen}
               options={{
+                headerTitle: "NASA's Astronomy Picture of the Day",
                 tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="image"
@@ -59,8 +58,9 @@ export default function App() {
             />
             <Tab.Screen
               name="Month"
-              component={Month}
+              component={MonthScreen}
               options={{
+                headerTitle: "This Month's Pictures",
                 tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="calendar-month"
@@ -72,8 +72,9 @@ export default function App() {
             />
             <Tab.Screen
               name="Search"
-              component={Search}
+              component={SearchScreen}
               options={{
+                headerTitle: "Find a Picture of the Day",
                 tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="image-search"
