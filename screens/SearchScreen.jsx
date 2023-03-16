@@ -1,9 +1,18 @@
-import { View, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 
 export default function Search() {
     return (
-        <View>
+        <ScrollView style={styles.wrapper}>
             <Text>Find a Photo</Text>
-        </View>
+        </ScrollView>
     )
 }
+
+
+const styles = StyleSheet.create({
+    wrapper: {
+        backgroundColor: '#005F73',
+        height: '100%',
+        padding: 32,
+    },
+})
