@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-import { ScrollView, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { Text } from '@rneui/themed';
 
 import PictureCard from '../components/PictureCard';
 import { apiKey, apiURL } from '../Constants';
 
-export default function Today({navigation}) {
+export default function Today() {
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -33,13 +33,12 @@ export default function Today({navigation}) {
 
     return (
         <ScrollView style={styles.wrapper}>
-            <Text style={styles.heading}>Today's Photo</Text>
-            {displayContainer(error, isLoaded, dataResult, navigation)}
+            {displayContainer(error, isLoaded, dataResult)}
         </ScrollView>
     );
 }
 
-function displayContainer(error, isLoaded, dataResult, navigation) {
+function displayContainer(error, isLoaded, dataResult) {
 
     if(error) {
         return (
@@ -62,22 +61,22 @@ function displayContainer(error, isLoaded, dataResult, navigation) {
         );
     } else {
         return (
-            <PictureCard itemData={dataResult} navigatorRef={navigation} />
+            <PictureCard itemData={dataResult} />
         );
     }
 }
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: '#005F73',
+        backgroundColor: '#bde3d7',
         height: '100%',
-        padding: 32,
+        paddingHorizontal: 32,
     },
     heading: {
         color: '#ffffff',
         marginBottom: 24,
         textTransform: 'uppercase',
         fontWeight: 700,
-        fontSize: 24,
+        fontSize: 20,
     },
 })

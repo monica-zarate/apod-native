@@ -17,8 +17,7 @@ import { ThemeProvider } from "@rneui/themed";
 
 // Project imports: Three Top-level transition screens
 import TodayScreen from "./screens/TodayScreen";
-import MonthScreen from "./screens/MonthScreen";
-import SearchScreen from "./screens/SearchScreen";
+import ArchiveScreen from "./screens/ArchiveScreen";
 
 // Bottom Tab Navigator will be applied using the Tab constant inside the Safe Area Provider & Navigator Containers.
 const Tab = createBottomTabNavigator();
@@ -32,10 +31,10 @@ export default function App() {
             initialRouteName="Today"
             screenOptions={{
               tabBarStyle: {
-                backgroundColor: "#bde3d7",
+                backgroundColor: "#ffffff",
               },
               tabBarActiveTintColor: "#005F73",
-              tabBarInactiveTintColor: "#00a0c1",
+              tabBarInactiveTintColor: "#4fb494",
               headerStyle: {
                 backgroundColor: "#bde3d7",
               },
@@ -57,24 +56,10 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="Month"
-              component={MonthScreen}
+              name="Archive"
+              component={ArchiveScreen}
               options={{
-                headerTitle: "This Month's Pictures",
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="calendar-month"
-                    color={color}
-                    size={size}
-                  />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Search"
-              component={SearchScreen}
-              options={{
-                headerTitle: "Find a Picture of the Day",
+                headerTitle: "Picture Archive",
                 tabBarIcon: ({ color, size }) => (
                   <MaterialCommunityIcons
                     name="image-search"

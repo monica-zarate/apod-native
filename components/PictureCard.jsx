@@ -1,15 +1,15 @@
 import { StyleSheet, ScrollView, View } from 'react-native';
 import { Text, Image } from '@rneui/themed';
 
-export default function PictureCard({itemData, navigationRef}){
+export default function PictureCard({itemData}){
 
     return (
         <ScrollView>
-            <View style={styles.wrapper}>  
-                <Text style={[styles.highlight, styles.spacing]}>{`Date: ${itemData.date}`}</Text>
-                <Text style={[styles.highlight]}>{`Title: ${itemData.title}`}</Text>
+            <View style={styles.wrapper}>
+                <Text style={styles.spacing}>{itemData.date}</Text>
+                <Text style={styles.highlight}>{itemData.title}</Text>
                 <Image source={{uri: itemData.url}} style={styles.img}/>
-                <Text style={[styles.spacing, styles.body]}>{itemData.explanation}</Text>
+                <Text style={styles.body}>{itemData.explanation}</Text>
             </View>
         </ScrollView>
     );
@@ -23,9 +23,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         padding: 24,
     },
+    textWrap: {
+        flex: 1,
+        flexDirection: 'row',
+    },
     highlight: {
         color: '#005F73',
         fontWeight: 'bold',
+        fontSize: 20,
     },
     spacing: {
         marginBottom: 24,
