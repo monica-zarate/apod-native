@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { Text } from '@rneui/themed';
 
 import PictureCard from '../components/PictureCard';
-import { apiKey, apiURL } from '../Constants';
+import { apiKey, apiURL, colorPalette as c } from '../Constants';
 
 export default function Today() {
 
@@ -43,20 +43,20 @@ function displayContainer(error, isLoaded, dataResult) {
     if(error) {
         return (
             <ScrollView>
-              <Text style={styles.heading}>Error: {error.message}</Text>
+              <Text>Error: {error.message}</Text>
             </ScrollView>
         );
     } else if(!isLoaded) {
         return (
             <ScrollView>
-              <Text style={styles.heading}>Loading ...</Text>
-              <ActivityIndicator size="large" color="#00ff00"/>
+              <Text>Loading ...</Text>
+              <ActivityIndicator size="large" color={c.highlight}/>
             </ScrollView>
         );
     } else if(dataResult === undefined) {
         return (
             <ScrollView>
-              <Text style={styles.heading}>No records found for the search</Text>
+              <Text>No records found for the search</Text>
             </ScrollView>
         );
     } else {
@@ -68,15 +68,8 @@ function displayContainer(error, isLoaded, dataResult) {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: '#bde3d7',
+        backgroundColor: c.primary,
         height: '100%',
         paddingHorizontal: 32,
-    },
-    heading: {
-        color: '#ffffff',
-        marginBottom: 24,
-        textTransform: 'uppercase',
-        fontWeight: 700,
-        fontSize: 20,
     },
 })

@@ -4,7 +4,7 @@ import { View, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { Text, Button, SearchBar } from '@rneui/themed';
 
 import PictureCard from '../components/PictureCard';
-import { apiKey, apiURL } from '../Constants';
+import { apiKey, apiURL, colorPalette as c } from '../Constants';
 
 export default function ArchiveScreen() {
 
@@ -21,39 +21,43 @@ export default function ArchiveScreen() {
       };
     
       const applySearch = () => {
-
         setCurrDate(searchInputVal);
         setSearchInputVal('');
         dateInput.current.blur();
       };
 
     useEffect(() => {
+            const uri = `${apiURL}?api_key=${apiKey}&date=${currDate}&thumbs=true`;
 
-        const uri = `${apiURL}?api_key=${apiKey}&date=${currDate}&thumbs=true`;
-
-        fetch(uri)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setPictureResult(result);
+            fetch(uri)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setPictureResult(result);
+                    setIsLoaded(true);
+                }, 
+                (error) => {
+                setError(error);
                 setIsLoaded(true);
-            }, 
-            (error) => {
-            setError(error);
-            setIsLoaded(true);
-            }
-        );
-
+                }
+            );
     }, [currDate]);
 
     return (
         <ScrollView style={styles.wrapper}>
-            <Text>Find a Photo</Text>
-            <View>
-                <SearchBar ref={dateInput} value={searchInputVal} onChangeText={updateSearchInputVal}/>
-                <Button onPress={applySearch}>Find</Button>
-            {displayContainer(error, isLoaded, pictureResult)}
+            <View style={styles.spacing}>
+                <Text style={styles.intro}>Which <Text h2>Picture of the Day</Text> would you like to see?</Text>
             </View>
+            <View style={styles.spacing}>
+                <Text>(Must be after 1995-06-16, the first day an APOD picture was posted.)</Text>
+            </View>
+            <View style={styles.spacing} >
+                <SearchBar placeholder='YYYY-MM-DD' ref={dateInput} value={searchInputVal} onChangeText={updateSearchInputVal}/>
+            </View>
+            <View style={styles.spacing}>
+                <Button title='Find' onPress={applySearch}/> 
+            </View>
+            {currDate && displayContainer(error, isLoaded, pictureResult)}
         </ScrollView>
     )
 }
@@ -61,26 +65,28 @@ export default function ArchiveScreen() {
 function displayContainer(error, isLoaded, pictureResult) {
     if(error) {
         return (
-            <View>
+            <View style={styles.cardWrap}>
               <Text style={styles.heading}>Error: {error.message}</Text>
             </View>
         );
     } else if(!isLoaded) {
         return (
-            <View>
+            <View style={styles.cardWrap}>
               <Text style={styles.heading}>Loading ...</Text>
               <ActivityIndicator size="large" color="#00ff00"/>
             </View>
         );
     } else if(pictureResult === undefined) {
         return (
-            <View>
+            <View style={styles.cardWrap}>
                 <Text style={styles.heading}>No records found for the search</Text>
             </View>
         );
     } else {
         return (
-            <PictureCard itemData={pictureResult} />
+            <View style={styles.cardWrap}>
+                <PictureCard itemData={pictureResult} />
+            </View>
         );
     }
 }
@@ -88,15 +94,17 @@ function displayContainer(error, isLoaded, pictureResult) {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: '#bde3d7',
+        backgroundColor: c.primary,
         height: '100%',
         paddingHorizontal: 32,
     },
-    heading: {
-        color: '#ffffff',
-        marginBottom: 24,
-        textTransform: 'uppercase',
-        fontWeight: 700,
+    intro: {
         fontSize: 20,
     },
+    spacing: {
+        marginBottom: 16
+    }, 
+    cardWrap: {
+        marginTop: 8
+    }
 })

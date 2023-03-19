@@ -13,7 +13,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Application's Theme
+import { colorPalette as c } from "./Constants";
 import { ThemeProvider } from "@rneui/themed";
+import { apodTheme } from "./themes/apodTheme";
 
 // Project imports: Three Top-level transition screens
 import TodayScreen from "./screens/TodayScreen";
@@ -25,20 +27,20 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <SafeAreaProvider>
-      <ThemeProvider>
+      <ThemeProvider theme={apodTheme}>
         <NavigationContainer>
           <Tab.Navigator
             initialRouteName="Today"
             screenOptions={{
               tabBarStyle: {
-                backgroundColor: "#ffffff",
+                backgroundColor: c.white,
               },
-              tabBarActiveTintColor: "#005F73",
-              tabBarInactiveTintColor: "#4fb494",
+              tabBarActiveTintColor: c.highlight,
+              tabBarInactiveTintColor: c.inactive,
               headerStyle: {
-                backgroundColor: "#bde3d7",
+                backgroundColor: c.primary,
               },
-              headerTintColor: "#005F73",
+              headerTintColor: c.highlight,
             }}
           >
             <Tab.Screen
