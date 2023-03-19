@@ -1,10 +1,14 @@
+// Native & RNEUI library elements
 import { StyleSheet, ScrollView, View } from 'react-native';
 import { Text, Image } from '@rneui/themed';
 
+// Project imports
 import { colorPalette as c } from "../Constants";
+
 
 export default function PictureCard({itemData}){
 
+    // Determine if the picture of the day is a video, to display the video thumbnail instead
     let imgUrl = itemData.media_type === 'video' ? imgUrl = itemData.thumbnail_url : imgUrl = itemData.url;
 
     return (

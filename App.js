@@ -12,14 +12,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-// Application's Theme
-import { colorPalette as c } from "./Constants";
-import { ThemeProvider } from "@rneui/themed";
-import { apodTheme } from "./themes/apodTheme";
-
 // Project imports: Three Top-level transition screens
+import { colorPalette as c } from "./Constants";
 import TodayScreen from "./screens/TodayScreen";
 import ArchiveScreen from "./screens/ArchiveScreen";
+
+// Application's Theme
+import { ThemeProvider } from "@rneui/themed";
+import { apodTheme } from "./themes/apodTheme";
 
 // Bottom Tab Navigator will be applied using the Tab constant inside the Safe Area Provider & Navigator Containers.
 const Tab = createBottomTabNavigator();
