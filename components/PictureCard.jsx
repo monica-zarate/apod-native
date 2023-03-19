@@ -5,12 +5,14 @@ import { colorPalette as c } from "../Constants";
 
 export default function PictureCard({itemData}){
 
+    let imgUrl = itemData.media_type === 'video' ? imgUrl = itemData.thumbnail_url : imgUrl = itemData.url;
+
     return (
         <ScrollView>
             <View style={styles.wrapper}>
                 <Text style={styles.spacing}>{itemData.date}</Text>
                 <Text h2 style={styles.spacing}>{itemData.title}</Text>
-                <Image source={{uri: itemData.url}} style={[styles.img, styles.spacing]}/>
+                <Image source={{uri: imgUrl}} style={[styles.img, styles.spacing]}/>
                 <Text style={styles.body}>{itemData.explanation}</Text>
             </View>
         </ScrollView>
